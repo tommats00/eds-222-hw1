@@ -101,8 +101,23 @@ If these samples were not randomly selected, then they were more than likely sub
 ### Question 3
 
 1.  For both the government data and the crowd-sourced data, report the sample mean, sample minimum, and sample maximum value of PM 2.5 (measured in $\mu g/m^3$).
+
+```{r}
+summary(crowdsourced$PM)
+
+summary(govt$PM)
+```
+The mean, minimum, and maximum for PM 2.5 in the crowdsourced data set are 70.2, 20.0, and 120.0 respectively.
+
+The mean, minimum, and maximum for PM 2.5 in the govt data set are 39.65, 15.0, and 65.00 respectively. 
+
 2.  Discuss any key differences that you see between these two samples.
+
+The crowdsourced data has substantially higher mimimum and maximum values than the govt data. They are almost double the values from the govt data set. That being said, the difference in mean is only 15 
+
 3.  Are the differences in mean pollution as expected, given what we know about the sampling strategies?
+
+Yes, the differences are as expected. The government data was collected in locations where air quality was thought to be cleaner, so we should expect the mean to be lower. 
 
 ### Question 4
 
