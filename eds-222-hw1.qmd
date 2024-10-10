@@ -2,6 +2,8 @@
 title: "EDS 222: Homework 1"
 date: "Assigned ???, due ???"
 author: "Your Name Here"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Background
@@ -26,6 +28,12 @@ In answering the following questions, please consider the lecture content from c
 
 ### Question 1
 
+```{r}
+library(dplyr)
+library(tidyverse)
+```
+
+
 Load the data from each source and label it as `crowdsourced` and `govt` accordingly. For example:
 
 ``` r
@@ -33,13 +41,42 @@ crowdsourced <- readRDS(file.path("data", "airpol-PK-crowdsourced.RDS"))
 govt <- readRDS(file.path("data", "airpol-PK-govt.RDS"))
 ```
 
+```{r}
+crowdsourced <- readRDS(file.path("data", "airpol-PK-crowdsourced.RDS"))
+govt <- readRDS(file.path("data", "airpol-PK-govt.RDS"))
+```
+
+
 ::: callout-warning
 There's an implicit assumption about file organization in the code above. What is it? How can you make the code work?
 :::
 
 1.  These dataframes have one row per pollution observation. How many pollution records are in each dataset?
+```{r}
+nrow(crowdsourced)
+nrow(govt)
+```
+
+There are 5488 pollution records in the crowdsourced data set.
+There are 1960 pollution records in govt data set. 
+
 2.  Each monitor is located at a unique latitude and longitude location. How many unique monitors are in each dataset?
 
+```{r}
+crowd_id <- crowdsourced %>% 
+  group_by(longitude, latitude) %>% 
+  mutate(id = cur_group_id()) 
+
+unique(crowd_id$id)
+
+govt_id <- govt %>% 
+  group_by(longitude, latitude) %>% 
+  mutate(id = cur_group_id())
+
+unique(govt_id$id)
+```
+There are 14 unique monitors in the crowd sourced data set. 
+There are 5 unique monitors in the govt data set. 
 ::: callout-tip
 `group_by(longitude,latitude)` and `cur_group_id()` in `dplyr` will help in creating a unique identifier for each (longitude, latitude) pair.
 :::
@@ -50,9 +87,16 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
 
 1.  What is the *population* in this setting? Please be precise.
 
+The population of the data sets is the entire city of Lahore, Pakistan.
+
+
 2.  What are the *samples* in this setting? Please be precise.
 
+The sample of the data set is the different monitoring spots. These are located at their specific latitudinal and longitudinal coordinates. 
+
 3.  These samples were not randomly collected from across locations in Lahore. Given the sampling approaches described above, discuss possible biases that may enter when we use these samples to construct estimates of population parameters.
+
+If these samples were not randomly selected, then they were more than likely subject to bias. They may have sampled from areas that have higher pollution rates than others. If data collection was taken from samples of high pollution than it will be representative of the rest of the population. Vice versa, if samples were taken in areas lower pollution, then it will be representative of the rest of the population. 
 
 ### Question 3
 
