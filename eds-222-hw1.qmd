@@ -1,8 +1,11 @@
 ---
 title: "EDS 222: Homework 1"
-date: "Assigned ???, due ???"
-author: "Your Name Here"
+date: "10/07/24, 10/14/24"
+author: "Tom Gibbens-Matsuyama"
 editor_options: 
+execute: 
+  warning: false
+  message: false
   chunk_output_type: console
 ---
 
@@ -161,9 +164,6 @@ bound <- bind_rows(crowdsourced, govt)
 
 rand_samp <- sample_n(bound, 1000)
 
-# cut_width() 
-
-# can use group_by() and then slice_sample()
 ```
 
 Second, create a *stratified random sample*. Do so by (i) stratifying your pooled data-set into strata of 0.01 degrees of latitude, and (ii) randomly sampling 200 air pollution observations from each stratum.
