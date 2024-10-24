@@ -85,15 +85,17 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
 
 1.  What is the *population* in this setting? Please be precise.
 
-The population of the data sets is the entire city of Lahore, Pakistan.
+The population of the data sets is the air quality of the entire city of Lahore, Pakistan during the time the data was taken. The time frame is from November 4th of 2018 to November 30th of 2019.
 
 2.  What are the *samples* in this setting? Please be precise.
 
-The sample of the data set is the different monitoring spots. These are located at their specific latitudinal and longitudinal coordinates.
+The samples in this setting are the data sets. The two data sets being used are the crowd sourced and government data from November 2018 to November 2019.
 
 3.  These samples were not randomly collected from across locations in Lahore. Given the sampling approaches described above, discuss possible biases that may enter when we use these samples to construct estimates of population parameters.
 
 If these samples were not randomly selected, then they were more than likely subject to bias. They may have sampled from areas that have higher pollution rates than others. If data collection was taken from samples of high pollution than it will be representative of the rest of the population. Vice versa, if samples were taken in areas lower pollution, then it will be representative of the rest of the population.
+
+Crowd sourced data potentially has sample-specific biases. One potential bias is that the people who are able to collect data are more likely educated about the topic in terms of collecting, monitoring, and applying data.
 
 ### Question 3
 
@@ -115,7 +117,7 @@ The crowdsourced data has substantially higher mimimum and maximum values than t
 
 3.  Are the differences in mean pollution as expected, given what we know about the sampling strategies?
 
-Yes, the differences are as expected. The government data was collected in locations where air quality was thought to be cleaner, so we should expect the mean to be lower.
+Yes, the differences are as expected. The government data was collected in locations where air quality was thought to be cleaner, so we should expect the mean to be lower. At the same time, crowd sourced data was still bias in the sampling locations, so the differences in mean to the true population could be even greater. Data taken in this study was located in just one small section of Lahore, so the sample for both data sets does not represent the entire population of Lahore.
 
 ### Question 4
 
@@ -127,14 +129,14 @@ Use the location of the air pollution stations for both of the sampling strategi
 
 ```{r}
 ggplot(data = crowdsourced) +
-  geom_point(aes(x = latitude, y = longitude, color ="Crowd_sourced")) +
-  geom_point(data = govt, aes(x = latitude, 
-                              y = longitude,
+  geom_point(aes(x = longitude, y = latitude, color ="Crowd_sourced")) +
+  geom_point(data = govt, aes(x = longitude, 
+                              y = latitude,
                               color = "Government",
                               )) +
   labs(title = 'Sampling sites for government and crowdsourced data',
-       x = 'Longitude',
-       y = 'Latitude') +
+       x = 'Latitude',
+       y = 'Longitude') +
   scale_color_manual("Monitor Type", values = c("Crowd_sourced" = "blue", "Government" = "red"))
   
 ```
@@ -160,10 +162,19 @@ First, generate a *random sample* of size $n=1000$ air pollution records by (i) 
 :::
 
 ```{r}
+govt <- govt %>% 
+  mutate(source = "govt")
+
+crowdsourced <- crowdsourced %>% 
+  mutate(source = "crowdsourced")
+
 bound <- bind_rows(crowdsourced, govt)
 
 rand_samp <- sample_n(bound, 1000)
 
+kableExtra::kable(rand_samp %>% 
+  group_by(source) %>% 
+  count()) 
 ```
 
 Second, create a *stratified random sample*. Do so by (i) stratifying your pooled data-set into strata of 0.01 degrees of latitude, and (ii) randomly sampling 200 air pollution observations from each stratum.
@@ -185,5 +196,7 @@ mean(strata_bound$PM)
 #### Question 6.2
 
 Compare estimated means of PM 2.5 for each sampling strategy to the NASA estimate of 89.2 $\mu g/m^3$. Which sample seems to match the satellite data best? What would you recommend the Prime Minister do? Does your proposed sampling strategy rely more on government or on crowd-sourced data? Why might that be the case?
+
+This question just wants last two data.
 
 The mean for my strata sampling strategy came out to 68.352. The means for just the crowd sourced data and government data are 70.2 and 39.65 respectively. All three of these means are substantially smaller than NASA's estimate. The data that is most closely represents NASA's data is the crowd sourced data. It relies more on crowd sourced data because the mean is substantially closer than the government collected data. This is because the government is bias in their data collection.
