@@ -162,34 +162,52 @@ First, generate a *random sample* of size $n=1000$ air pollution records by (i) 
 :::
 
 ```{r}
+# Create new column called source
+# Add what source each data set is
 govt <- govt %>% 
   mutate(source = "govt")
 
 crowdsourced <- crowdsourced %>% 
   mutate(source = "crowdsourced")
 
+
+# Bind these data sets together
 bound <- bind_rows(crowdsourced, govt)
 
+# Create a random sample using the bound data set 
 rand_samp <- sample_n(bound, 1000)
 
-kableExtra::kable(rand_samp %>% 
+# Createa a table of this random sample
+rand_samp_table <- kableExtra::kable(rand_samp %>% 
   group_by(source) %>% 
   count()) 
+
+# Produce Table
+rand_samp_table
+
+# Calculate Mean
+mean(rand_samp$PM)
 ```
 
 Second, create a *stratified random sample*. Do so by (i) stratifying your pooled data-set into strata of 0.01 degrees of latitude, and (ii) randomly sampling 200 air pollution observations from each stratum.
 
 ```{r}
+# Creating new variable with rounded latitude
 round_bound <- bound %>% 
   mutate(lat_round = round(latitude, digits = 2)) 
 
+# Create 5 stratified random samples at different latitudes
+# each with n = 200
 strata_bound <- round_bound %>% 
   slice_sample(n = 200, replace = FALSE, by = lat_round) 
 
+
+# Plot these 
 ggplot(strata_bound) +
   geom_bar(aes(x = lat_round)) +
   theme_bw()
 
+# Calculate mean
 mean(strata_bound$PM)
 ```
 
@@ -199,4 +217,4 @@ Compare estimated means of PM 2.5 for each sampling strategy to the NASA estimat
 
 This question just wants last two data.
 
-The mean for my strata sampling strategy came out to 68.352. The means for just the crowd sourced data and government data are 70.2 and 39.65 respectively. All three of these means are substantially smaller than NASA's estimate. The data that is most closely represents NASA's data is the crowd sourced data. It relies more on crowd sourced data because the mean is substantially closer than the government collected data. This is because the government is bias in their data collection.
+The mean for my strata sampling strategy came out to 68.352. The mean for my random sample of n = 1000 came out to 60.994. Both of these means are substantially smaller than NASA's mean of 89.2. The stratified sample data represents the satellite data better, but it isn't necessarily close. The prime minister should collect data that better represents the entire population. Data is only taken from a small part of Lahore, when it should be taken throughout the entire city. It might be easier to collect crowd sourced data because it may take a lot of government resources to collect all over the city randomly.

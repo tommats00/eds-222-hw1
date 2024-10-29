@@ -233,15 +233,16 @@ Warning
 <ol type="1">
 <li>What is the <em>population</em> in this setting? Please be precise.</li>
 </ol>
-<p>The population of the data sets is the entire city of Lahore, Pakistan.</p>
+<p>The population of the data sets is the air quality of the entire city of Lahore, Pakistan during the time the data was taken. The time frame is from November 4th of 2018 to November 30th of 2019.</p>
 <ol start="2" type="1">
 <li>What are the <em>samples</em> in this setting? Please be precise.</li>
 </ol>
-<p>The sample of the data set is the different monitoring spots. These are located at their specific latitudinal and longitudinal coordinates.</p>
+<p>The samples in this setting are the data sets. The two data sets being used are the crowd sourced and government data from November 2018 to November 2019.</p>
 <ol start="3" type="1">
 <li>These samples were not randomly collected from across locations in Lahore. Given the sampling approaches described above, discuss possible biases that may enter when we use these samples to construct estimates of population parameters.</li>
 </ol>
 <p>If these samples were not randomly selected, then they were more than likely subject to bias. They may have sampled from areas that have higher pollution rates than others. If data collection was taken from samples of high pollution than it will be representative of the rest of the population. Vice versa, if samples were taken in areas lower pollution, then it will be representative of the rest of the population.</p>
+<p>Crowd sourced data potentially has sample-specific biases. One potential bias is that the people who are able to collect data are more likely educated about the topic in terms of collecting, monitoring, and applying data.</p>
 </section>
 <section id="question-3" class="level3">
 <h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
@@ -269,7 +270,7 @@ Warning
 <ol start="3" type="1">
 <li>Are the differences in mean pollution as expected, given what we know about the sampling strategies?</li>
 </ol>
-<p>Yes, the differences are as expected. The government data was collected in locations where air quality was thought to be cleaner, so we should expect the mean to be lower.</p>
+<p>Yes, the differences are as expected. The government data was collected in locations where air quality was thought to be cleaner, so we should expect the mean to be lower. At the same time, crowd sourced data was still bias in the sampling locations, so the differences in mean to the true population could be even greater. Data taken in this study was located in just one small section of Lahore, so the sample for both data sets does not represent the entire population of Lahore.</p>
 </section>
 <section id="question-4" class="level3">
 <h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
@@ -289,14 +290,14 @@ Tip
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> crowdsourced) <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> latitude, <span class="at">y =</span> longitude, <span class="at">color =</span><span class="st">"Crowd_sourced"</span>)) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> govt, <span class="fu">aes</span>(<span class="at">x =</span> latitude, </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">y =</span> longitude,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> longitude, <span class="at">y =</span> latitude, <span class="at">color =</span><span class="st">"Crowd_sourced"</span>)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> govt, <span class="fu">aes</span>(<span class="at">x =</span> longitude, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">y =</span> latitude,</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">color =</span> <span class="st">"Government"</span>,</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                              )) <span class="sc">+</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Sampling sites for government and crowdsourced data'</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'Longitude'</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Latitude'</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'Latitude'</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Longitude'</span>) <span class="sc">+</span></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="st">"Monitor Type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Crowd_sourced"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Government"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -333,21 +334,70 @@ Tip
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bound <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(crowdsourced, govt)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>rand_samp <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(bound, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column called source</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add what source each data set is</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>govt <span class="ot">&lt;-</span> govt <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="st">"govt"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>crowdsourced <span class="ot">&lt;-</span> crowdsourced <span class="sc">%&gt;%</span> </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="st">"crowdsourced"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind these data sets together</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>bound <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(crowdsourced, govt)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a random sample using the bound data set </span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>rand_samp <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(bound, <span class="dv">1000</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Createa a table of this random sample</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>rand_samp_table <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">kable</span>(rand_samp <span class="sc">%&gt;%</span> </span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()) </span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Produce Table</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>rand_samp_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">source</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">crowdsourced</td>
+<td style="text-align: right;">721</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">govt</td>
+<td style="text-align: right;">279</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Mean</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rand_samp<span class="sc">$</span>PM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 61.678</code></pre>
+</div>
 </div>
 <p>Second, create a <em>stratified random sample</em>. Do so by (i) stratifying your pooled data-set into strata of 0.01 degrees of latitude, and (ii) randomly sampling 200 air pollution observations from each stratum.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>round_bound <span class="ot">&lt;-</span> bound <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lat_round =</span> <span class="fu">round</span>(latitude, <span class="at">digits =</span> <span class="dv">2</span>)) </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>strata_bound <span class="ot">&lt;-</span> round_bound <span class="sc">%&gt;%</span> </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">by =</span> lat_round) </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(strata_bound) <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> lat_round)) <span class="sc">+</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating new variable with rounded latitude</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>round_bound <span class="ot">&lt;-</span> bound <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lat_round =</span> <span class="fu">round</span>(latitude, <span class="at">digits =</span> <span class="dv">2</span>)) </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create 5 stratified random samples at different latitudes</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># each with n = 200</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>strata_bound <span class="ot">&lt;-</span> round_bound <span class="sc">%&gt;%</span> </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">by =</span> lat_round) </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot these </span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(strata_bound) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> lat_round)) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -355,16 +405,18 @@ Tip
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(strata_bound<span class="sc">$</span>PM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(strata_bound<span class="sc">$</span>PM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 66.3</code></pre>
+<pre><code>[1] 67.527</code></pre>
 </div>
 </div>
 </section>
 <section id="question-6.2" class="level4">
 <h4 class="anchored" data-anchor-id="question-6.2">Question 6.2</h4>
 <p>Compare estimated means of PM 2.5 for each sampling strategy to the NASA estimate of 89.2 <span class="math inline">\(\mu g/m^3\)</span>. Which sample seems to match the satellite data best? What would you recommend the Prime Minister do? Does your proposed sampling strategy rely more on government or on crowd-sourced data? Why might that be the case?</p>
-<p>The mean for my strata sampling strategy came out to 68.352. The means for just the crowd sourced data and government data are 70.2 and 39.65 respectively. All three of these means are substantially smaller than NASA’s estimate. The data that is most closely represents NASA’s data is the crowd sourced data. It relies more on crowd sourced data because the mean is substantially closer than the government collected data. This is because the government is bias in their data collection.</p>
+<p>This question just wants last two data.</p>
+<p>The mean for my strata sampling strategy came out to 68.352. The mean for my random sample of n = 1000 came out to 60.994. Both of these means are substantially smaller than NASA’s mean of 89.2. The stratified sample data represents the satellite data better, but it isn’t necessarily close. The prime minister should collect data that better represents the entire population. Data is only taken from a small part of Lahore, when it should be taken throughout the entire city. It might be easier to collect crowd sourced data because it may take a lot of government resources to collect all over the city randomly.</p>
 </section>
 </section>
 </section>
