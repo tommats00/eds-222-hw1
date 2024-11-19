@@ -115,7 +115,7 @@ The mean, minimum, and maximum for PM 2.5 in the govt data set are 39.65, 15.0, 
 
 The crowdsourced data has substantially higher mimimum and maximum values than the govt data. They are almost double the values from the govt data set. That being said, the difference in mean is only 15
 
-3.  Are the differences in mean pollution as expected, given what we know about the sampling strategies?
+3.  Are the differences in mean pollution as expected, given what we know about the sampling strategie?
 
 Yes, the differences are as expected. The government data was collected in locations where air quality was thought to be cleaner, so we should expect the mean to be lower. At the same time, crowd sourced data was still bias in the sampling locations, so the differences in mean to the true population could be even greater. Data taken in this study was located in just one small section of Lahore, so the sample for both data sets does not represent the entire population of Lahore.
 

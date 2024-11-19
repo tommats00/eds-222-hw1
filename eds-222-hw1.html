@@ -268,7 +268,7 @@ Warning
 </ol>
 <p>The crowdsourced data has substantially higher mimimum and maximum values than the govt data. They are almost double the values from the govt data set. That being said, the difference in mean is only 15</p>
 <ol start="3" type="1">
-<li>Are the differences in mean pollution as expected, given what we know about the sampling strategies?</li>
+<li>Are the differences in mean pollution as expected, given what we know about the sampling strategie?</li>
 </ol>
 <p>Yes, the differences are as expected. The government data was collected in locations where air quality was thought to be cleaner, so we should expect the mean to be lower. At the same time, crowd sourced data was still bias in the sampling locations, so the differences in mean to the true population could be even greater. Data taken in this study was located in just one small section of Lahore, so the sample for both data sets does not represent the entire population of Lahore.</p>
 </section>
@@ -367,11 +367,11 @@ Tip
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">crowdsourced</td>
-<td style="text-align: right;">721</td>
+<td style="text-align: right;">737</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">govt</td>
-<td style="text-align: right;">279</td>
+<td style="text-align: right;">263</td>
 </tr>
 </tbody>
 </table>
@@ -379,7 +379,7 @@ Tip
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Mean</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rand_samp<span class="sc">$</span>PM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 61.678</code></pre>
+<pre><code>[1] 63.618</code></pre>
 </div>
 </div>
 <p>Second, create a <em>stratified random sample</em>. Do so by (i) stratifying your pooled data-set into strata of 0.01 degrees of latitude, and (ii) randomly sampling 200 air pollution observations from each stratum.</p>
@@ -408,7 +408,7 @@ Tip
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(strata_bound<span class="sc">$</span>PM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 67.527</code></pre>
+<pre><code>[1] 66.483</code></pre>
 </div>
 </div>
 </section>
